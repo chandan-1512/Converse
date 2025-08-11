@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Image Converter</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}" />
+  <script>
+    function toggleMultiple() {
+      const format = document.getElementById("target_format").value;
+      const fileInput = document.getElementById("image_input");
+      if (format === "pdf") {
+        fileInput.setAttribute("multiple", "multiple");
+      } else {
+        fileInput.removeAttribute("multiple");
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h2>🖼️ Image Format converter</h2>
+    <form id="convertForm" enctype="multipart/form-data" method="POST" action="/convert">
+      <label>Select image(s):</label>
+      <input type="file" id="image_input" name="images" accept="image/*" required />
+
+      <label>Select output format:</label>
+      <select name="target_format" id="target_format" onchange="toggleMultiple()" required>
+        <option value="">--Choose Format--</option>
+        <option value="jpg">JPG</option>
+        <option value="png">PNG</option>
+        <option value="webp">WEBP</option>
+        <option value="bmp">BMP</option>
+        <option value="tiff">TIFF</option>
+        <option value="pdf">PDF</option>
+      </select>
+
+      <button type="submit">Convert & Download</button>
+    </form>
+  </div>
+</body>
+</html>
